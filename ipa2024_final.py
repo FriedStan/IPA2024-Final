@@ -11,8 +11,9 @@ import os
 import time
 import requests
 import json
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-# import restconf_final
+import restconf_final
 # import netmiko_final
 # import ansible_final
 
@@ -85,22 +86,22 @@ while True:
 
 # 5. Complete the logic for each command
 
-        # if command == "create":
-        #     responseMessage = restconf_final.create()
-        # elif command == "delete":
-        #     responseMessage = restconf_final.delete()
-        # elif command == "enable":
-        #     responseMessage = restconf_final.enable()
-        # elif command == "disable":
-        #     responseMessage = restconf_final.disable()
-        # elif command == "status":
-        #     responseMessage = restconf_final.status()
+        if command == "create":
+            responseMessage = restconf_final.create()
+        elif command == "delete":
+            responseMessage = restconf_final.delete()
+        elif command == "enable":
+            responseMessage = restconf_final.enable()
+        elif command == "disable":
+            responseMessage = restconf_final.disable()
+        elif command == "status":
+            responseMessage = restconf_final.status()
         # elif command == "gigabit_status":
         #     responseMessage = netmiko_final.gigabit_status()
         # elif command == "showrun":
         #     responseMessage = ansible_final.showrun()
-        # else:
-        responseMessage = "Error: No command or unknown command"
+        else:
+            responseMessage = "Error: No command or unknown command"
         
 # 6. Complete the code to post the message to the Webex Teams room.
 
@@ -117,7 +118,7 @@ while True:
         # https://developer.webex.com/docs/basics for more detail
 
         if command == "showrun" and responseMessage == 'ok':
-            filename = "show_run_66070030_R1.txt"
+            filename = "show_run_66070030_R4.txt"
             fileobject = open(filename, "rb")
             filetype = "text/plain"
             # build multipart/form-data payload including the file
@@ -138,6 +139,7 @@ while True:
             HTTPHeaders = {
                 "Authorization": f"Bearer {ACCESS_TOKEN}",
                 "Content-Type": "application/json",
+                "Accept": "application/json"
             }
 
         # Post the call to the Webex Teams message API.
