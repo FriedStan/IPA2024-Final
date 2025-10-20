@@ -15,7 +15,7 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 
 import restconf_final
 import netmiko_final
-# import ansible_final
+import ansible_final
 
 load_dotenv()
 
@@ -98,8 +98,8 @@ while True:
             responseMessage = restconf_final.status()
         elif command == "gigabit_status":
             responseMessage = netmiko_final.gigabit_status()
-        # elif command == "showrun":
-        #     responseMessage = ansible_final.showrun()
+        elif command == "showrun":
+            responseMessage = ansible_final.showrun()
         else:
             responseMessage = "Error: No command or unknown command"
         
